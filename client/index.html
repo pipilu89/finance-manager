@@ -4,29 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meower - Twitter for cats</title>
+  <title>Finance Tracker</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
   <link rel="stylesheet" href="styles.css">
+  <script src="./mustache/mustache.min.js"></script>
 </head>
 
 <body>
   <header>
-    <h1 class="title">twitter for cats</h1>
+    <h1 class="title">Finance Tracker</h1>
+    <a href="./electricity.html">electricity</a>
   </header>
   <main>
-    <form class="mew-form">
-      <label for="name">Name</label>
-      <input class="u-full-width" type="text" id="name" name="name">
-      <label for="content">Mew</label>
-      <textarea class="u-full-width" type="text" id="content" name="content"></textarea>
+    <form class="input-form">
+      <!-- income/expense -->
+      <!-- date -->
+      <!-- <label for="date">Date</label> -->
+      <input type="date" name="date" id="date" required>
+
+      <!-- account: cash taobao, wechat, alipay etc -->
+      <!-- <label for="account">Account</label> -->
+      <input type="text" id="account" name="account" placeholder="account" required>
+      <!-- category -->
+      <!-- <label for="category">Category</label> -->
+      <input type="text" id="category" name="category" placeholder="category" required>
+      <!-- sub cat -->
+      <!-- <label for="subCategory">Sub Category</label> -->
+      <input type="text" id="subCategory" name="subCategory" placeholder="subCategory">
+      <!-- amount -->
+      <!-- <label for="amount">Amount</label> -->
+      <input type="number" id="amount" name="amount" placeholder="amount" required></input>
+      <!-- notes -->
+      <!-- <label for="notes">Notes</label> -->
+      <input type="text" id="notes" name="notes" placeholder="notes"></input>
       <button class="button-primary">send</button>
     </form>
+
     <div class="loading">
       <img src="loading.gif" alt="">
     </div>
-    <div class="mews"></div>
+    <div class="transactions" id="transactions"></div>
+
   </main>
-  <script src="client.js"></script>
+  <script type="module" src="client.js"></script>
 </body>
 
 </html>

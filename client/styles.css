@@ -2,8 +2,8 @@
   text-align: center;
 }
 
-.mew-form, .loading{
-  width: 50%;
+.input-form, .loading{
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -11,7 +11,7 @@
   text-align: center;
 }
 
-.mews{
+.mews, .transactions {
   width:80%;
   margin:auto;
 }

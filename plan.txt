@@ -1,0 +1,25 @@
+create authenticated api and host on heroku. node.js jwt mdb.
+once this works can use react or vanilla js to build frontend.
+https://www.youtube.com/watch?v=2jqok-WgelI
+
+
+
+destructure pos data to show summary?
+
+goal
+-automatic monthly/weekly reports PL
+-input data from phone like money manager
+-combine data from pos and mm into one place
+-pwa work on desktop and mobile, even if no internet.
+
+input sources
+-expenses inputted from phone (mm)
+-data from pos
+-data from ctrip, meituan etc
+-data from quhuhu.
+-wechat/alipay weekly/monthly totals.
+
+DB collections
+-pos
+-mm
+-elec

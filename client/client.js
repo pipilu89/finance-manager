@@ -1,68 +1,64 @@
-console.log("hello");
+import { mustacheRenderFunction } from './mustache/mustacheModule.mjs'
+import { API_URL_EXPENSE_ADD, API_URL_EXPENSE } from './apiUrls.js'
+
 const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading')
-const mewsElement = document.querySelector('.mews')
 
-//if deployed update to reflect hostel uri
-const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000/mews' : 'https://meower-api.now.sh/mews'
+//set date input to current date
+document.getElementById('date').value = new Date().toISOString().slice(0, 10)
 
-loadingElement.style.display = ''
+loadingElement.style.display = '';
 
-listAllMews()
+getExpenseData2()
 
 form.addEventListener('submit', (event) => {
   event.preventDefault()
-
-  const formData = new FormData(form)
-  const name = formData.get('name')
-  const content = formData.get('content')
-
-  const mew = { name, content }
-  // console.log(mew);
   form.style.display = 'none'
   loadingElement.style.display = ''
 
-  fetch(API_URL, {
+  const formData = new FormData(form)
+  const date = formData.get('date')
+  const account = formData.get('account')
+  const amount = formData.get('amount')
+  const category = formData.get('category')
+  const subCategory = formData.get('subCategory')
+  const notes = formData.get('notes')
+
+  const transaction = JSON.stringify({ date, account, amount, category, subCategory, notes })
+  console.log(transaction);
+
+  fetch(API_URL_EXPENSE_ADD, {
     method: 'POST',
-    body: JSON.stringify(mew),
+    body: transaction,
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'auth-token': localStorage.getItem('auth-token')
     }
   }).then(response => response.json())
-    .then(createdMew => {
-      console.log(createdMew);
+    .then(createdTransaction => {
+      console.log(createdTransaction);
       form.reset()
       form.style.display = ''
-      listAllMews()
+      // recentTransactions()
+      getExpenseData2()
       loadingElement.style.display = 'none'
     })
 })
 
-function listAllMews() {
-  mewsElement.innerHTML = ''
-  fetch(API_URL)
-    .then(response => response.json())
-    .then(mews => {
-      console.log(mews);
-      mews.reverse()
-      mews.forEach(mew => {
-        const div = document.createElement('div');
-        const header = document.createElement('h3')
-        header.textContent = mew.name
-
-        const contents = document.createElement('p')
-        contents.textContent = mew.content
-
-        const date = document.createElement('small')
-        date.textContent = new Date(mew.created)
-
-        div.appendChild(header)
-        div.appendChild(contents)
-        div.appendChild(date)
-
-        mewsElement.appendChild(div)
-      });
-      loadingElement.style.display = 'none'
-
+async function getExpenseData2() {
+  fetch(API_URL_EXPENSE, {
+    headers: {
+      'auth-token': localStorage.getItem('auth-token')
+    }
+  })
+    .then((response) => {
+      return response.json()
     })
+    .then((res) => {
+      console.log(res)
+      mustacheRenderFunction(res
+        , './mustache/transactionHistory.mustache', "transactions")
+      loadingElement.style.display = 'none'
+    })
+    .catch((err) => console.log(err))
 }

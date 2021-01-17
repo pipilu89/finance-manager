@@ -1,0 +1,25 @@
+  <table id='posHistoryTable'>
+    <thead>
+      <tr>
+        <th>date</th>
+        <th>name</th>
+        <th>type</th>
+        <th>total</th>
+        <th>items</th>
+        <th>notes</th>
+      </tr>
+    </thead>
+    <tbody>
+{{#.}}
+  <tr>
+    <td> {{date}}{{transDate}}</td>
+    <td> {{name}}</td>
+    <td> {{type}}</td>
+    <td> {{total}}</td>
+    <td> {{items}}</td>
+    <td> {{notes}}</td>
+
+  </tr>
+    {{/.}}
+    </tbody>
+  </table>

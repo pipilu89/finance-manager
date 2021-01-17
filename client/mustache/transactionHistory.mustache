@@ -1,0 +1,24 @@
+  <table id='transactionHistoryTable'>
+    <thead>
+      <tr>
+        <th>date</th>
+        <th>account</th>
+        <th>amount</th>
+        <th>category</th>
+        <th>subCategory</th>
+        <th>notes</th>
+      </tr>
+    </thead>
+    <tbody>
+{{#.}}
+  <tr>
+    <td> {{date}}</td>
+    <td> {{account}}</td>
+    <td> {{amount}}</td>
+    <td> {{category}}</td>
+    <td> {{subCategory}}</td>
+    <td> {{notes}}</td>
+  </tr>
+    {{/.}}
+    </tbody>
+  </table>
