@@ -7,7 +7,6 @@ export async function login() {
     console.log("login clicked");
     document.getElementById('loading').style.display = '';
     //get login from form
-    //     "email": "email@test122.com", "password": "123456"
     const email = document.getElementById('email').value
     const pw = document.getElementById('pw').value
 
@@ -23,10 +22,7 @@ export async function login() {
       headers: {
         'content-type': 'application/json'
       },
-      // body: {
-      //   "email": "email@test122.com",
-      //   "password": "123456"
-      // }
+
     })
 
       // Retrieve jwt in its body as ReadableStream
