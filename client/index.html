@@ -14,6 +14,7 @@
   <header>
     <h1 class="title">Finance Tracker 0.1</h1>
     <a href="./electricity.html">electricity</a>
+    <a href="./settings.html">settings</a>
   </header>
   <main>
     <form class="input-form">
@@ -23,14 +24,11 @@
       <input type="date" name="date" id="date" required>
 
       <!-- account: cash taobao, wechat, alipay etc -->
-      <!-- <label for="account">Account</label> -->
-      <input type="text" id="account" name="account" placeholder="account" required>
+      <select id="account" name="account" required></select>
       <!-- category -->
-      <!-- <label for="category">Category</label> -->
-      <input type="text" id="category" name="category" placeholder="category" required>
+      <select id="category" name="category" required></select>
       <!-- sub cat -->
-      <!-- <label for="subCategory">Sub Category</label> -->
-      <input type="text" id="subCategory" name="subCategory" placeholder="subCategory">
+      <select id="subCategory" name="subCategory"></select>
       <!-- amount -->
       <!-- <label for="amount">Amount</label> -->
       <input type="number" id="amount" name="amount" placeholder="amount" required></input>
@@ -47,6 +45,7 @@
 
   </main>
   <script type="module" src="client.js"></script>
+  <script type="module" src="category.js"></script>
 </body>
 
 </html>

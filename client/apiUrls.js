@@ -13,3 +13,5 @@ export const API_URL_LOGIN = 'https://fin-man89.herokuapp.com/api/user/login'
 
 //if deployed update to reflect hostel uri
 // const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000/transactions' : 'https://meower-api.now.sh/mews'
+
+export const API_URL_ACCOUNT_ADD = ""

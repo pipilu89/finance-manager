@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <title>Settings</title>
+</head>
+
+<body>
+  <header>
+    <h1>Settings</h1>
+    <a href="./index.html">home</a>
+  </header>
+  <main>
+    <h3>Edit accounts</h3>
+    <form name="newAccountForm" id="newAccountForm" method="post">
+      <input name="newAccountInput" type="text" placeholder="new account">
+      <button type="submit">add</button>
+    </form>
+    <h3>Edit categories</h3>
+    <form name="newCatForm" method="post">
+      <input name="newCatInput" type="text" placeholder="new category">
+      <input name="newSubCatInput" type="text" placeholder="new sub category">
+      <button type="submit">add</button>
+    </form>
+  </main>
+  <script type="module" src="./settings.js"></script>
+</body>
+
+</html>
