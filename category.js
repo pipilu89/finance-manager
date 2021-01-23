@@ -1,8 +1,10 @@
-import { accountsArray, categories } from './data.js'
+import { categories } from './data.js'
+import { API_URL_ACCOUNT_GET } from './apiUrls.js'
 
 run()
 async function run() {
-  accountDropdown()
+  // let accounts;
+  getAccountsFromMdb()
   categoryDropdown()
   subCatDropdown()
   //eventlistener for when first selection is made
@@ -55,7 +57,8 @@ function accountDropdown() {
   const accountSelect = document.getElementById("account");
   //write new options
   // const { accounts } = accountsObj
-  const accounts = accountsArray
+  const accounts = JSON.parse(localStorage.getItem('accounts'))
+
   // console.log(accounts);
   for (const index in accounts) {
     // console.log(accounts[index]);
@@ -64,4 +67,28 @@ function accountDropdown() {
       index
     );
   }
+}
+
+//get initial account data
+async function getAccountsFromMdb() {
+  fetch(API_URL_ACCOUNT_GET, {
+    headers: {
+      'auth-token': localStorage.getItem('auth-token')
+    }
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .then((res) => {
+      // console.log(res[0])
+      //store accounts
+      const { accounts } = res[0]
+      localStorage.setItem("accounts", JSON.stringify(accounts));
+      //refresh dropdown select
+      accountDropdown()
+    })
+    .catch((err) => {
+      console.log(err)
+      accountDropdown()
+    })
 }

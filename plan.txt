@@ -1,3 +1,4 @@
+set initial accounts in ls. if no key exists will throw error from getitem?
 store accounts/cats in localstorage. get set
 
 create authenticated api and host on heroku. node.js jwt mdb.

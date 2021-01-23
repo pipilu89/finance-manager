@@ -1,6 +1,6 @@
 import { API_URL_ACCOUNT_ADD } from './apiUrls.js';
 import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
-import { accountsArray } from './data.js'
+// import { accountsArray } from './data.js'
 
 // const form = document.querySelector('form');
 const accountForm = document.getElementById('newAccountForm');
@@ -9,37 +9,28 @@ accountForm.addEventListener('submit', (event) => {
   event.preventDefault()
   //validate
 
-  // accountForm.style.display = 'none'
-  // loadingElement.style.display = ''
-
   const formData = new FormData(accountForm)
   const newAccount = formData.get('newAccountInput')
 
-  //create new account object by pushing new account into old account array. Then send new obj.
-  // console.log("new account: ", newAccount);
-  // const accountsArray = JSON.parse(localStorage.getItem('accounts'));
+  //create new account array by pushing new account into old account array.
+  const accountsArray = JSON.parse(localStorage.getItem('accounts'))
   accountsArray.push(newAccount);
   localStorage.setItem("accounts", JSON.stringify(accountsArray));
 
-  //create new account object to post to mongodb
-  const newAccountObj = { accounts: accountsArray }
-  console.log(newAccountObj);
-
+  //--send account array as string
   fetch(API_URL_ACCOUNT_ADD, {
     method: 'POST',
-    body: newAccountObj,
+    body: localStorage.getItem('accounts'),
     headers: {
       'content-type': 'application/json',
       'auth-token': localStorage.getItem('auth-token')
     }
   }).then(response => response.json())
-    .then(createdTransaction => {
-      console.log(createdTransaction);
-      form.reset()
-      form.style.display = ''
-      // // displayAddedAccount()
-      // getExpenseData2()
-      // loadingElement.style.display = 'none'
+    .then(res => {
+      console.log('res from mdb: ', res);
+      //reset form
+      accountForm.reset()
+      // accountForm.style.display = ''
     })
   //refresh list
   getAccountList()
@@ -48,25 +39,14 @@ accountForm.addEventListener('submit', (event) => {
 getAccountList()
 //delete edit accounts list. get from local or mdb?
 async function getAccountList() {
-  // fetch(API_URL_EXPENSE, {
-  //   headers: {
-  //     'auth-token': localStorage.getItem('auth-token')
-  //   }
-  // })
   const accountsArray = JSON.parse(localStorage.getItem('accounts'))
-  console.log(accountsArray)
-
+  // console.log(accountsArray)
 
   await mustacheRenderFunction2(accountsArray
     , './mustache/accountsList.mustache', "accountsList")
 
-  // setTimeout(deleteProduct, 100)
   deleteProduct()
   editProduct()
-
-
-
-
 }
 
 //event delete button. need to run after render to create eventlistners?
@@ -77,22 +57,37 @@ function deleteProduct() {
     if (confirm(`确定删掉吗? Delete ${recordKey}, are you sure?`)) {
       console.log(recordKey);
       //delete from ls and db
+      const accountsArray = JSON.parse(localStorage.getItem('accounts'))
       const filteredAry = accountsArray.filter(e => e !== recordKey)
       console.log('f arr', filteredAry);
       localStorage.setItem('accounts', JSON.stringify(filteredAry))
 
-      // delete form DB
-
-      //refresh list
-      getAccountList();
     }
-  };
+    // delete form DB
+    //--send account array as string
+    fetch(API_URL_ACCOUNT_ADD, {
+      method: 'POST',
+      // body: JSON.stringify(accountsArray),
+      body: localStorage.getItem('accounts'),
+      headers: {
+        'content-type': 'application/json',
+        'auth-token': localStorage.getItem('auth-token')
+      }
+    }).then(response => response.json())
+      .then(res => {
+        console.log('res from mdb: ', res);
+        //refresh list
+        getAccountList()
 
-  //add event listener
+      })
+
+  };
+  //add event listener for delete
   const elements = document.getElementsByClassName("deleteProductBtn");
   for (let i = 0; i < elements.length; i++) {
     elements[i].addEventListener("click", deleteItem, false);
   }
+
 }
 
 //Event: edit product
@@ -146,18 +141,31 @@ function cancelEditItem() {
 
 //save edited product
 async function saveEditItem(recordKey) {
+  const accountsArray = JSON.parse(localStorage.getItem('accounts'))
   const editedAccount = document.getElementById(`${recordKey}-name`).innerText;
   const filteredAry = accountsArray.filter(e => e !== recordKey)
   filteredAry.push(editedAccount)
-
 
   console.log("save:", filteredAry);
   if (confirm(`确定保存? Edit: ${recordKey}, are you sure?`)) {
     //update ls
     localStorage.setItem('accounts', JSON.stringify(filteredAry))
 
-    //refresh list
-    getAccountList()
   }
+  //--send account array as string
+  fetch(API_URL_ACCOUNT_ADD, {
+    method: 'POST',
+    body: localStorage.getItem('accounts'),
+    headers: {
+      'content-type': 'application/json',
+      'auth-token': localStorage.getItem('auth-token')
+    }
+  }).then(response => response.json())
+    .then(res => {
+      console.log('res from mdb: ', res);
+
+      //refresh list
+      getAccountList()
+    })
 
 }
