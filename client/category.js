@@ -25,7 +25,8 @@ async function run() {
   subCatDropdown()
   //eventlistener for when first selection is made
   document.getElementById("category").addEventListener("click", subCatDropdown);
-  document.getElementById("category").addEventListener("touchstart", subCatDropdown);
+  // document.getElementById("category").addEventListener("touchstart", subCatDropdown);
+  document.getElementById("category").addEventListener("change", subCatDropdown);
 
   function categoryDropdown() {
     //destructure
