@@ -22,3 +22,16 @@ export function mustacheRenderFunction(result, template, renderLocationID) {
       document.getElementById(renderLocationID).innerHTML = rendered;
     });
 }
+
+export function mustacheRenderFunction2(result, template, renderLocationID) {
+  //mustache function if using external template
+  return new Promise((resolve) => {
+    fetch(template)
+      .then((response) => response.text())
+      .then((template) => {
+        var rendered = Mustache.render(template, result);
+        document.getElementById(renderLocationID).innerHTML = rendered;
+      })
+      .then(resolve)
+  })
+}

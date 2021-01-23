@@ -9,7 +9,7 @@ document.getElementById('date').value = new Date().toISOString().slice(0, 10)
 
 loadingElement.style.display = '';
 
-// getExpenseData2()
+getExpenseData2()
 
 form.addEventListener('submit', (event) => {
   event.preventDefault()

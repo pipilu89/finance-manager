@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
   <link rel="stylesheet" href="styles.css">
+  <script src="./mustache/mustache.min.js"></script>
   <title>Settings</title>
 </head>
 
@@ -17,9 +18,10 @@
   <main>
     <h3>Edit accounts</h3>
     <form name="newAccountForm" id="newAccountForm" method="post">
-      <input name="newAccountInput" type="text" placeholder="new account">
+      <input name="newAccountInput" type="text" placeholder="new account" required>
       <button type="submit">add</button>
     </form>
+    <div id="accountsList"></div>
     <h3>Edit categories</h3>
     <form name="newCatForm" method="post">
       <input name="newCatInput" type="text" placeholder="new category">
@@ -27,6 +29,7 @@
       <button type="submit">add</button>
     </form>
   </main>
+  <script type="module" src="./data.js"></script>
   <script type="module" src="./settings.js"></script>
 </body>
 

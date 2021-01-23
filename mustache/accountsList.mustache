@@ -1,0 +1,24 @@
+<table id='accountsListTable'>
+    <thead>
+      <tr>
+        <th>account</th>
+        <th>action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+{{#.}}
+  <tr  id="{{.}}">
+    <td class="{{.}}-edit" id="{{.}}-name"> {{.}}</td>
+    <td>
+      <button class='editProductBtn mr-2 btn-sm btn-dark'>修改</button>
+      <button id="{{.}}-deleteProductBtn" class='deleteProductBtn btn-sm btn-danger'>删除</button>
+      <div class ="row">
+        <button id="{{.}}-cancelEditProductBtn" class='cancelEditProductBtn btn-sm btn-danger ml-3 mt-3 mr-2' >cancel</button>
+        <button id="{{.}}-saveEditProductBtn" class='saveEditProductBtn btn-sm btn-success mt-3' >save</button>
+      </div>
+    </td>
+  </tr>
+    {{/.}}
+    </tbody>
+  </table>

@@ -1,4 +1,4 @@
-dropdown update on click on mobile
+store accounts/cats in localstorage. get set
 
 create authenticated api and host on heroku. node.js jwt mdb.
 once this works can use react or vanilla js to build frontend.
