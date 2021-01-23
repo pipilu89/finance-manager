@@ -26,7 +26,7 @@ async function run() {
   //eventlistener for when first selection is made
   document
     .getElementById("category")
-    .addEventListener("click", subCatDropdown);
+    .addEventListener("click", () => subCatDropdown());
 
   function categoryDropdown() {
     //destructure

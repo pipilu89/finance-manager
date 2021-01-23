@@ -1,8 +1,8 @@
+dropdown update on click on mobile
+
 create authenticated api and host on heroku. node.js jwt mdb.
 once this works can use react or vanilla js to build frontend.
 https://www.youtube.com/watch?v=2jqok-WgelI
-
-
 
 destructure pos data to show summary?
 
