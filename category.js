@@ -18,7 +18,7 @@ function categoryDropdown() {
   //destructure
   const select = document.getElementById("category");
   for (const { category } of categories) {
-    console.log(category);
+    // console.log(category);
     select.options[select.options.length] = new Option(category);
   }
 }
@@ -27,14 +27,14 @@ function subCatDropdown() {
   //get value of selected option
   const e = document.getElementById("category");
   const selectedCat = e.options[e.selectedIndex].text;
-  console.log("cat", selectedCat);
+  // console.log("cat", selectedCat);
 
   //destructure. filter or map
   const selectedCatObj = categories.filter(categories => categories.category === selectedCat)[0]
-  console.log(selectedCatObj);
+  // console.log(selectedCatObj);
 
   const { subCategory } = selectedCatObj
-  console.log("subCategory", subCategory);
+  // console.log("subCategory", subCategory);
 
   const subCatSelect = document.getElementById("subCategory");
 
@@ -45,7 +45,7 @@ function subCatDropdown() {
   }
   //write new options
   for (const index in subCategory) {
-    console.log(subCategory[index]);
+    // console.log(subCategory[index]);
     subCatSelect.options[subCatSelect.options.length] = new Option(
       subCategory[index],
       index
@@ -71,6 +71,7 @@ function accountDropdown() {
 
 //get initial account data
 async function getAccountsFromMdb() {
+  console.log('getting accounts from mdb...');
   fetch(API_URL_ACCOUNT_GET, {
     headers: {
       'auth-token': localStorage.getItem('auth-token')
@@ -86,9 +87,10 @@ async function getAccountsFromMdb() {
       localStorage.setItem("accounts", JSON.stringify(accounts));
       //refresh dropdown select
       accountDropdown()
+      console.log('accounts retrieve success');
     })
     .catch((err) => {
-      console.log(err)
+      console.log('error getting accounts from mdb: ', err)
       accountDropdown()
     })
 }

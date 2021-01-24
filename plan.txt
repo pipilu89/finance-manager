@@ -1,3 +1,4 @@
+account add /edit not working on mobile. to do with submit/click?
 set initial accounts in ls. if no key exists will throw error from getitem?
 store accounts/cats in localstorage. get set
 
