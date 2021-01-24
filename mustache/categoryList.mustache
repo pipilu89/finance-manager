@@ -1,0 +1,27 @@
+<table id='categoryListTable'>
+    <thead>
+      <tr>
+        <th>cat</th>
+        <th>subCat</th>
+        <th>action</th>
+      </tr>
+    </thead>
+  <tbody>
+{{#categories}} 
+  {{#subCategory}}
+  <tr id="{{category}}-{{.}}">
+    <td class="{{.}}-edit" id="{{.}}-cat"> {{category}}</td>
+    <td class="{{.}}-edit" id="{{.}}-subcat"> {{.}}</td>
+    <td>
+      <button class='editProductBtn mr-2 btn-sm btn-dark'>修改</button>
+      <button id="{{category}}-{{.}}-deleteProductBtn" class='deleteProductBtn btn-sm btn-danger'>删除</button>
+      <div class ="row">
+        <button id="{{.}}-cancelEditProductBtn" class='cancelEditProductBtn btn-sm btn-danger ml-3 mt-3 mr-2' >cancel</button>
+        <button id="{{.}}-saveEditProductBtn" class='saveEditProductBtn btn-sm btn-success mt-3' >save</button>
+      </div>
+    </td>
+  </tr>
+  {{/subCategory}}
+ {{/categories}} 
+  </tbody>
+</table>

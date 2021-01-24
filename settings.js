@@ -5,6 +5,7 @@ import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
 // const form = document.querySelector('form');
 const accountForm = document.getElementById('newAccountForm');
 
+
 accountForm.addEventListener('submit', (event) => {
   event.preventDefault()
   //validate
@@ -169,3 +170,58 @@ async function saveEditItem(recordKey) {
     })
 
 }
+
+//cateogeries
+
+
+getCategoryList()
+//delete edit accounts list. get from local or mdb?
+async function getCategoryList() {
+  const categoryArray = JSON.parse(localStorage.getItem('settings'))
+  console.log(categoryArray)
+
+  await mustacheRenderFunction2(categoryArray
+    , './mustache/categoryList.mustache', "categoryList")
+
+  deleteProduct()
+  editProduct()
+}
+
+//delete needs what info?
+//id, object address
+const cat = 'wages'
+console.log(cat);
+const a = JSON.parse(localStorage.getItem('settings'))
+// const b = a.categories[0].subCategory[0]
+const d = a.accounts[0]
+const b = a.categories[0].subCategory[0]
+// const c = a.categories[2].category
+const c = [a].map(x => x.categories);
+const { categories } = a
+const { categories: [subCategory] } = a
+const { categories: [...category] } = a
+const [...cat2] = category
+// const { subCategory } = a
+console.log("b: ", b);
+console.log("c: ", c);
+console.log("d: ", d);
+console.log("categories: ", categories);
+console.log("subCategory: ", subCategory);
+console.log("category: ", category);
+console.log("cat2: ", cat2);
+
+const person = {
+  name: 'John Doe',
+  age: 25,
+  location: {
+    country: 'Canada',
+    city: 'Vancouver',
+    coordinates: [49.2827, -123.1207]
+  }
+}
+
+// Observe how mix of object and array destructuring is being used here
+// We are assigning 5 variables: name, country, city, lat, lng
+const { name, location: { country, city, coordinates: [lat, lng] } } = person;
+
+console.log(`I am ${name} from ${city}, ${country}. Latitude(${lat}), Longitude(${lng})`);

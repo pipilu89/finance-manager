@@ -1,14 +1,15 @@
+//populate account and category dropdown selects. runs when open home page
 import { categories } from './data.js'
 import { API_URL_ACCOUNT_GET } from './apiUrls.js'
 
 run()
 async function run() {
-  // let accounts;
+
   getAccountsFromMdb()
   categoryDropdown()
   subCatDropdown()
   //eventlistener for when first selection is made
-  // document.getElementById("category").addEventListener("click", subCatDropdown);
+  // document.getElementById("category").addEventListener("click", subCatDropdown); //click doesn't work properly with mobile. "change" seems best event.
   // document.getElementById("category").addEventListener("touchstart", subCatDropdown);
   document.getElementById("category").addEventListener("change", subCatDropdown);
 

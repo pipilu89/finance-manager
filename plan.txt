@@ -1,4 +1,5 @@
-account add /edit not working on mobile. to do with submit/click?
+spaces in id names not valid html5. eg: <tr id="{{category}}-{{.}}">. possible solution change seetings object so each cat/subcat is an object with name and id. other option dont allow spaces in cat/subcat names.
+
 set initial accounts in ls. if no key exists will throw error from getitem?
 store accounts/cats in localstorage. get set
 
