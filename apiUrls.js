@@ -19,6 +19,6 @@ export const API_URL_ACCOUNT_ADD = "https://fin-man89.herokuapp.com/api/accounts
 export const API_URL_ACCOUNT_GET = "https://fin-man89.herokuapp.com/api/accounts/get"
 
 export const API_URL_SETTINGS_ADD = "https://fin-man89.herokuapp.com/api/settings/add"
-export const API_URL_SETINGS_GET = "https://fin-man89.herokuapp.com/api/settings/get"
+export const API_URL_SETTINGS_GET = "https://fin-man89.herokuapp.com/api/settings/get"
 // export const API_URL_SETTINGS_ADD = "http://localhost:3000/api/settings/add"
 // export const API_URL_SETTINGS_GET = "http://localhost:3000/api/settings/get"
