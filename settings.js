@@ -5,19 +5,15 @@ import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
 
 // const form = document.querySelector('form');
 const accountForm = document.getElementById('newAccountForm');
+const categoryForm = document.getElementById('newCatForm');
 
-
+//add new account
 accountForm.addEventListener('submit', (event) => {
   event.preventDefault()
   //validate
 
   const formData = new FormData(accountForm)
   const newAccount = formData.get('newAccountInput')
-
-  //create new account array by pushing new account into old account array.
-  // const accountsArray = JSON.parse(localStorage.getItem('accounts'))
-  // accountsArray.push(newAccount);
-  // localStorage.setItem("accounts", JSON.stringify(accountsArray));
 
   //push new account into settings object
   const newAccountObj = { name: newAccount, id: Date.now() }
@@ -183,19 +179,18 @@ async function saveEditItem(recordKey) {
 
 }
 
-//cateogeries
+//categories
 
 
 getCategoryList()
 //delete edit accounts list. get from local or mdb?
 async function getCategoryList() {
-  const categoryArray = JSON.parse(localStorage.getItem('settings'))
-  // console.log(categoryArray)
+  const a = JSON.parse(localStorage.getItem('settings2'))
 
-  await mustacheRenderFunction2(categoryArray
+  await mustacheRenderFunction2(a
     , './mustache/categoryList.mustache', "categoryList")
 
-  deleteProduct()
+  deleteCategory()
   editProduct()
 }
 
@@ -220,8 +215,15 @@ const accArray = accounts.map(x => x.name)
 //list of cats ok
 const { categories } = a //array of vategory objects
 const catArray = categories.map(x => x.name);//array of category names
-// console.log("categories: ", categories);
-// console.log("catArray: ", catArray);
+//cat from id
+const b = JSON.parse(localStorage.getItem('settings2'))
+const recordIDtest = 2
+// console.log(b.categories);
+const index = b.categories.findIndex(item => item.id === parseInt(recordIDtest))
+// console.log('index', index);
+//a.accounts.splice(index, 1);
+
+
 
 //subcats
 // const cat = 'hostel supplies'
@@ -245,4 +247,85 @@ function getAccountsArray() {
   const { accounts } = a
   const accArray = accounts.map(x => x.name)
   return accArray
+}
+
+//test adding/deleting data from cat and sub cat
+
+//add new category
+categoryForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  console.log('clicked cat form submit');
+  //validate
+
+  const formData = new FormData(categoryForm)
+  const newCat = formData.get('newCatInput')
+
+  //push new account into settings object
+  const newCatObj = { name: newCat, id: Date.now() }
+  const a = JSON.parse(localStorage.getItem('settings2'))
+  a.categories.push(newCatObj);
+  localStorage.setItem("settings2", JSON.stringify(a));
+
+  //--send settings object as string
+  fetch(API_URL_SETTINGS_ADD, {
+    method: 'POST',
+    body: localStorage.getItem('settings2'),
+    headers: {
+      'content-type': 'application/json',
+      'auth-token': localStorage.getItem('auth-token')
+    }
+  }).then(response => response.json())
+    .then(res => {
+      console.log('res from mdb: ', res);
+      //reset form
+      categoryForm.reset()
+      // accountForm.style.display = ''
+    })
+  //refresh list
+  getCategoryList()
+})
+
+
+//event delete button. need to run after render to create eventlistners?
+function deleteCategory() {
+  const deleteItem = function (e) {
+    console.log(e.target.parentNode.parentNode.id);
+    const recordID = e.target.parentNode.parentNode.id;
+    const recordName = e.target.parentNode.parentNode.className;
+    // console.log('recordID, recordName', recordID, recordName);
+    if (confirm(`确定删掉吗? Delete ${recordName}， id：${recordID}, are you sure?`)) {
+      // console.log(recordID);
+      //delete account from settings obj
+      const a = JSON.parse(localStorage.getItem('settings2'))
+
+      //indexof account to delete
+      const index = a.accounts.findIndex(item => item.id === parseInt(recordID))
+      a.categories.splice(index, 1);
+      localStorage.setItem("settings2", JSON.stringify(a));
+
+      // delete form DB
+      //--send account array as string
+      fetch(API_URL_SETTINGS_ADD, {
+        method: 'POST',
+        // body: JSON.stringify(accountsArray),
+        body: localStorage.getItem('settings2'),
+        headers: {
+          'content-type': 'application/json',
+          'auth-token': localStorage.getItem('auth-token')
+        }
+      }).then(response => response.json())
+        .then(res => {
+          console.log('res from mdb: ', res);
+          //refresh list
+          getCategoryList()
+
+        })
+    }
+  };
+  //add event listener for delete
+  const elements = document.getElementsByClassName("deleteProductBtn");
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", deleteItem, false);
+  }
+
 }
