@@ -1,5 +1,6 @@
-import { API_URL_ACCOUNT_ADD } from './apiUrls.js';
+import { API_URL_SETTINGS_ADD } from './apiUrls.js';
 import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
+// import { getAccountsArray } from './category.js'
 // import { accountsArray } from './data.js'
 
 // const form = document.querySelector('form');
@@ -14,14 +15,20 @@ accountForm.addEventListener('submit', (event) => {
   const newAccount = formData.get('newAccountInput')
 
   //create new account array by pushing new account into old account array.
-  const accountsArray = JSON.parse(localStorage.getItem('accounts'))
-  accountsArray.push(newAccount);
-  localStorage.setItem("accounts", JSON.stringify(accountsArray));
+  // const accountsArray = JSON.parse(localStorage.getItem('accounts'))
+  // accountsArray.push(newAccount);
+  // localStorage.setItem("accounts", JSON.stringify(accountsArray));
 
-  //--send account array as string
-  fetch(API_URL_ACCOUNT_ADD, {
+  //push new account into settings object
+  const newAccountObj = { name: newAccount, id: Date.now() }
+  const a = JSON.parse(localStorage.getItem('settings2'))
+  a.accounts.push(newAccountObj);
+  localStorage.setItem("settings2", JSON.stringify(a));
+
+  //--send settings object as string
+  fetch(API_URL_SETTINGS_ADD, {
     method: 'POST',
-    body: localStorage.getItem('accounts'),
+    body: localStorage.getItem('settings2'),
     headers: {
       'content-type': 'application/json',
       'auth-token': localStorage.getItem('auth-token')
@@ -40,7 +47,9 @@ accountForm.addEventListener('submit', (event) => {
 getAccountList()
 //delete edit accounts list. get from local or mdb?
 async function getAccountList() {
-  const accountsArray = JSON.parse(localStorage.getItem('accounts'))
+  // const accountsArray = JSON.parse(localStorage.getItem('accounts'))
+  const a = JSON.parse(localStorage.getItem('settings2'))
+  const accountsArray = a.accounts
   // console.log(accountsArray)
 
   await mustacheRenderFunction2(accountsArray
@@ -54,34 +63,37 @@ async function getAccountList() {
 function deleteProduct() {
   const deleteItem = function (e) {
     console.log(e.target.parentNode.parentNode.id);
-    const recordKey = e.target.parentNode.parentNode.id;
-    if (confirm(`确定删掉吗? Delete ${recordKey}, are you sure?`)) {
-      console.log(recordKey);
-      //delete from ls and db
-      const accountsArray = JSON.parse(localStorage.getItem('accounts'))
-      const filteredAry = accountsArray.filter(e => e !== recordKey)
-      console.log('f arr', filteredAry);
-      localStorage.setItem('accounts', JSON.stringify(filteredAry))
+    const recordID = e.target.parentNode.parentNode.id;
+    const recordName = e.target.parentNode.parentNode.className;
+    // console.log('recordID, recordName', recordID, recordName);
+    if (confirm(`确定删掉吗? Delete ${recordName}， id：${recordID}, are you sure?`)) {
+      // console.log(recordID);
+      //delete account from settings obj
+      const a = JSON.parse(localStorage.getItem('settings2'))
 
+      //indexof account to delete
+      const index = a.accounts.findIndex(item => item.id === parseInt(recordID))
+      a.accounts.splice(index, 1);
+      localStorage.setItem("settings2", JSON.stringify(a));
+
+      // delete form DB
+      //--send account array as string
+      fetch(API_URL_SETTINGS_ADD, {
+        method: 'POST',
+        // body: JSON.stringify(accountsArray),
+        body: localStorage.getItem('settings2'),
+        headers: {
+          'content-type': 'application/json',
+          'auth-token': localStorage.getItem('auth-token')
+        }
+      }).then(response => response.json())
+        .then(res => {
+          console.log('res from mdb: ', res);
+          //refresh list
+          getAccountList()
+
+        })
     }
-    // delete form DB
-    //--send account array as string
-    fetch(API_URL_ACCOUNT_ADD, {
-      method: 'POST',
-      // body: JSON.stringify(accountsArray),
-      body: localStorage.getItem('accounts'),
-      headers: {
-        'content-type': 'application/json',
-        'auth-token': localStorage.getItem('auth-token')
-      }
-    }).then(response => response.json())
-      .then(res => {
-        console.log('res from mdb: ', res);
-        //refresh list
-        getAccountList()
-
-      })
-
   };
   //add event listener for delete
   const elements = document.getElementsByClassName("deleteProductBtn");
@@ -178,7 +190,7 @@ getCategoryList()
 //delete edit accounts list. get from local or mdb?
 async function getCategoryList() {
   const categoryArray = JSON.parse(localStorage.getItem('settings'))
-  console.log(categoryArray)
+  // console.log(categoryArray)
 
   await mustacheRenderFunction2(categoryArray
     , './mustache/categoryList.mustache', "categoryList")
@@ -189,39 +201,48 @@ async function getCategoryList() {
 
 //delete needs what info?
 //id, object address
-const cat = 'wages'
-console.log(cat);
-const a = JSON.parse(localStorage.getItem('settings'))
+
+
+
+
+//SETTINGS2
+///--Eg of how to extract data from settings object
+const a = JSON.parse(localStorage.getItem('settings2'))
+
+//accounts array ok
+const d = a.accounts[0].name
+const { accounts } = a
+const accArray = accounts.map(x => x.name)
+// console.log("d: ", d);
+// console.log('accounts array', accounts);
+// console.log('accArray', accArray);
+
+//list of cats ok
+const { categories } = a //array of vategory objects
+const catArray = categories.map(x => x.name);//array of category names
+// console.log("categories: ", categories);
+// console.log("catArray: ", catArray);
+
+//subcats
+// const cat = 'hostel supplies'
+const cat = 'hostel repair'
+// console.log(cat);
+//indexof
+const catArrayIndex = catArray.indexOf(cat)//get index of required category.
 // const b = a.categories[0].subCategory[0]
-const d = a.accounts[0]
-const b = a.categories[0].subCategory[0]
-// const c = a.categories[2].category
-const c = [a].map(x => x.categories);
-const { categories } = a
-const { categories: [subCategory] } = a
-const { categories: [...category] } = a
-const [...cat2] = category
-// const { subCategory } = a
-console.log("b: ", b);
-console.log("c: ", c);
-console.log("d: ", d);
-console.log("categories: ", categories);
-console.log("subCategory: ", subCategory);
-console.log("category: ", category);
-console.log("cat2: ", cat2);
+const subCatObjsArray = a.categories[catArrayIndex].subCategory //array of subcat objects
+const subCatArray = subCatObjsArray.map(x => x.name);//array of subcat names at indexof cat. ok
+// console.log("b: ", b);
+// console.log('indexof', catArrayIndex);
+// console.log("subCatObjsArray: ", subCatObjsArray);
+// console.log("subCatArray: ", subCatArray);
 
-const person = {
-  name: 'John Doe',
-  age: 25,
-  location: {
-    country: 'Canada',
-    city: 'Vancouver',
-    coordinates: [49.2827, -123.1207]
-  }
+
+// fix to make exports. duplicated in caegory and settings
+// get settings account, category and subcat functions
+function getAccountsArray() {
+  const a = JSON.parse(localStorage.getItem('settings2'))
+  const { accounts } = a
+  const accArray = accounts.map(x => x.name)
+  return accArray
 }
-
-// Observe how mix of object and array destructuring is being used here
-// We are assigning 5 variables: name, country, city, lat, lng
-const { name, location: { country, city, coordinates: [lat, lng] } } = person;
-
-console.log(`I am ${name} from ${city}, ${country}. Latitude(${lat}), Longitude(${lng})`);
