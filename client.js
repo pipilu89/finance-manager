@@ -1,5 +1,5 @@
 import { mustacheRenderFunction } from './mustache/mustacheModule.mjs'
-import { API_URL_EXPENSE_ADD, API_URL_EXPENSE, API_URL_ACCOUNT_GET } from './apiUrls.js'
+import { API_URL_EXPENSE_ADD, API_URL_EXPENSE } from './apiUrls.js'
 
 const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading')
@@ -7,7 +7,7 @@ const loadingElement = document.querySelector('.loading')
 //set date input to current date
 document.getElementById('date').value = new Date().toISOString().slice(0, 10)
 
-loadingElement.style.display = '';
+loadingElement.style.display = 'none';
 
 // getExpenseData2()
 

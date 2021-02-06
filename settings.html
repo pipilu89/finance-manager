@@ -25,6 +25,11 @@
     <h3>Edit categories</h3>
     <form name="newCatForm" id="newCatForm" method="post">
       <input name="newCatInput" type="text" placeholder="new category">
+      <button type="submit">add</button>
+    </form>
+    <form name="newSubCatForm" id="newSubCatForm" method="post">
+      <!-- <input name="parentCatInput" type="text" placeholder="parent category"> -->
+      <select id="parentCatInput" name="parentCatInput" required></select>
       <input name="newSubCatInput" type="text" placeholder="new sub category">
       <button type="submit">add</button>
     </form>

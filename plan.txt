@@ -1,6 +1,4 @@
-update routes. rather than accounts have settings. get or post new settings.
-
-spaces in id names not valid html5. eg: <tr id="{{category}}-{{.}}">. possible solution change seetings object so each cat/subcat is an object with name and id. other option dont allow spaces in cat/subcat names.
+edit accounts, cats, subcats
 
 set initial accounts in ls. if no key exists will throw error from getitem?
 store accounts/cats in localstorage. get set

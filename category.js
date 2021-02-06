@@ -5,7 +5,8 @@ import { API_URL_SETTINGS_GET } from './apiUrls.js'
 run()
 async function run() {
 
-  getAccountsFromMdb()
+  getSettingsFromMdb()
+  accountDropdown()
   categoryDropdown()
   subCatDropdown()
   //eventlistener for when first selection is made
@@ -65,7 +66,7 @@ function accountDropdown() {
 }
 
 //get initial account data
-async function getAccountsFromMdb() {
+async function getSettingsFromMdb() {
   console.log('getting accounts from mdb...');
   fetch(API_URL_SETTINGS_GET, {
     headers: {
@@ -84,11 +85,15 @@ async function getAccountsFromMdb() {
 
       //refresh dropdown select
       accountDropdown()
-      console.log('accounts retrieve success');
+      categoryDropdown()
+      subCatDropdown()
+      console.log('settings retrieve success');
     })
     .catch((err) => {
-      console.log('error getting accounts from mdb: ', err)
+      console.log('error getting settings from mdb: ', err)
       accountDropdown()
+      categoryDropdown()
+      subCatDropdown()
     })
 }
 
