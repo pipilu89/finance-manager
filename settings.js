@@ -204,42 +204,33 @@ async function getCategoryList() {
 
 //SETTINGS2
 ///--Eg of how to extract data from settings object
-const a = JSON.parse(localStorage.getItem('settings2'))
+// const a = JSON.parse(localStorage.getItem('settings2'))
 
 //accounts array ok
-const d = a.accounts[0].name
-const { accounts } = a
-const accArray = accounts.map(x => x.name)
-// console.log("d: ", d);
-// console.log('accounts array', accounts);
-// console.log('accArray', accArray);
+// const d = a.accounts[0].name
+// const { accounts } = a
+// const accArray = accounts.map(x => x.name)
+
 
 //list of cats ok
-const { categories } = a //array of vategory objects
-const catArray = categories.map(x => x.name);//array of category names
-//cat from id
-const b = JSON.parse(localStorage.getItem('settings2'))
-const recordIDtest = 2
-// console.log(b.categories);
-const index = b.categories.findIndex(item => item.id === parseInt(recordIDtest))
-// console.log('index', index);
-//a.accounts.splice(index, 1);
+// const { categories } = a //array of vategory objects
+// const catArray = categories.map(x => x.name);//array of category names
+// const b = JSON.parse(localStorage.getItem('settings2'))
+// const recordIDtest = 2
+// const index = b.categories.findIndex(item => item.id === parseInt(recordIDtest))
+
 
 
 
 //subcats
-// const cat = 'hostel supplies'
-const cat = 'hostel repair'
-// console.log(cat);
-//indexof
-const catArrayIndex = catArray.indexOf(cat)//get index of required category.
-// const b = a.categories[0].subCategory[0]
-const subCatObjsArray = a.categories[catArrayIndex].subCategory //array of subcat objects
-const subCatArray = subCatObjsArray.map(x => x.name);//array of subcat names at indexof cat. ok
-// console.log("b: ", b);
-// console.log('indexof', catArrayIndex);
-// console.log("subCatObjsArray: ", subCatObjsArray);
-// console.log("subCatArray: ", subCatArray);
+
+// const cat = 'hostel repair'
+
+// const catArrayIndex = catArray.indexOf(cat)//get index of required category.
+
+// const subCatObjsArray = a.categories[catArrayIndex].subCategory //array of subcat objects
+// const subCatArray = subCatObjsArray.map(x => x.name);//array of subcat names at indexof cat. ok
+
 
 
 

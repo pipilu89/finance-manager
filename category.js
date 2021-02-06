@@ -18,6 +18,7 @@ async function run() {
 
 function categoryDropdown() {
   const select = document.getElementById("category");
+  select.length = 0;
   const categoryArray = getCategoryArray()
 
   for (const index in categoryArray) {
@@ -36,10 +37,11 @@ function subCatDropdown() {
   const subCategoryArray = getSubCategoryArray(selectedCat)
   const subCatSelect = document.getElementById("subCategory");
   //clear old options
-  const length = subCatSelect.options.length;
-  for (let i = length - 1; i >= 0; i--) {
-    subCatSelect.options[i] = null;
-  }
+  subCatSelect.length = 0;
+  // const length = subCatSelect.options.length;
+  // for (let i = length - 1; i >= 0; i--) {
+  //   subCatSelect.options[i] = null;
+  // }
   //write new options
   for (const index in subCategoryArray) {
     // console.log(subCategory[index]);
@@ -52,9 +54,8 @@ function subCatDropdown() {
 
 function accountDropdown() {
   const accountSelect = document.getElementById("account");
-  //write new options
-  // const accounts = JSON.parse(localStorage.getItem('accounts'))
-  //from settings obj
+  accountSelect.length = 0;
+  //write new options from settings obj
   const accArray = getAccountsArray()
 
   for (const index in accArray) {
