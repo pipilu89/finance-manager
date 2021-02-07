@@ -48,6 +48,8 @@ form.addEventListener('submit', (event) => {
     .then(createdTransaction => {
       console.log(createdTransaction);
       form.reset()
+      //date picker
+      document.getElementById('date').value = new Date().toISOString().slice(0, 10)
       form.style.display = ''
       // recentTransactions()
       getExpenseData2()
