@@ -1,4 +1,4 @@
-import { getElecData } from './electricity.js'
+import { getElecData } from './history.js'
 import { API_URL_LOGIN } from './apiUrls.js'
 //login
 export async function login() {

@@ -5,10 +5,11 @@ import { API_URL_SETTINGS_GET } from './apiUrls.js'
 run()
 async function run() {
 
-  getSettingsFromMdb()
   accountDropdown()
   categoryDropdown()
   subCatDropdown()
+  getSettingsFromMdb()
+
   //eventlistener for when first selection is made
   // document.getElementById("category").addEventListener("click", subCatDropdown); //click doesn't work properly with mobile. "change" seems best event.
   // document.getElementById("category").addEventListener("touchstart", subCatDropdown);
@@ -68,7 +69,7 @@ function accountDropdown() {
 
 //get initial account data
 async function getSettingsFromMdb() {
-  console.log('getting accounts from mdb...');
+  console.log('getting settings from mdb...');
   fetch(API_URL_SETTINGS_GET, {
     headers: {
       'auth-token': localStorage.getItem('auth-token')

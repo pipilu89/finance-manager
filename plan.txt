@@ -1,4 +1,9 @@
+Reports, summaries.
+  -monthly total
+make pwa. manifest, background sync etc.
 edit accounts, cats, subcats
+
+settings validation eg trim whitespace?
 
 set initial accounts in ls. if no key exists will throw error from getitem?
 store accounts/cats in localstorage. get set
