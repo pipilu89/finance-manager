@@ -1,3 +1,5 @@
+create initial localstorage.
+
 Reports, summaries.
   -monthly total
 make pwa. manifest, background sync etc.
