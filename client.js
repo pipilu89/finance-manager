@@ -1,5 +1,7 @@
 import { mustacheRenderFunction } from './mustache/mustacheModule.mjs'
 import { API_URL_EXPENSE_ADD, API_URL_EXPENSE } from './apiUrls.js'
+import { subCatDropdown } from './category.js'
+
 
 const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading')
@@ -48,6 +50,7 @@ form.addEventListener('submit', (event) => {
     .then(createdTransaction => {
       console.log(createdTransaction);
       form.reset()
+      subCatDropdown() //reset subcat dropdown select
       //date picker
       document.getElementById('date').value = new Date().toISOString().slice(0, 10)
       form.style.display = ''

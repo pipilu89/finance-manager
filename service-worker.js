@@ -28,16 +28,16 @@ registerRoute(/\.ico$/, new StaleWhileRevalidate());
 
 //To create a Workbox Background Sync Queue you need to construct it with a queue name (which must be unique to your origin):
 //https://developers.google.com/web/tools/workbox/modules/workbox-background-sync
-const { Queue } = workbox.backgroundSync;
+// const { Queue } = workbox.backgroundSync;
 
-const queue = new Queue("myQueueName");
+// const queue = new Queue("myQueueName");
 
-self.addEventListener("fetch", event => {
-  // Clone the request to ensure it's safe to read when
-  // adding to the Queue.
-  const promiseChain = fetch(event.request.clone()).catch(err => {
-    return queue.pushRequest({ request: event.request });
-  });
+// self.addEventListener("fetch", event => {
+//   // Clone the request to ensure it's safe to read when
+//   // adding to the Queue.
+//   const promiseChain = fetch(event.request.clone()).catch(err => {
+//     return queue.pushRequest({ request: event.request });
+//   });
 
-  event.waitUntil(promiseChain);
-});
+//   event.waitUntil(promiseChain);
+// });

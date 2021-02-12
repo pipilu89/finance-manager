@@ -28,7 +28,7 @@ function categoryDropdown() {
   }
 }
 
-function subCatDropdown() {
+export function subCatDropdown() {
   //get value of selected option
   const e = document.getElementById("category");
   const selectedCat = e.options[e.selectedIndex].text;
