@@ -2,8 +2,8 @@
 //inspect sw from within chrome: chrome://inspect/#service-workers
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
-    // navigator.serviceWorker.register("./service-worker.js").then(
-    navigator.serviceWorker.register("/service-worker.js").then(
+    navigator.serviceWorker.register("./service-worker.js").then(
+      // navigator.serviceWorker.register("/service-worker.js").then(
       function (registration) {
         // Registration was successful
         console.log(
