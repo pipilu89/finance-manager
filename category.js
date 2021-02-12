@@ -5,11 +5,15 @@ import { API_URL_SETTINGS_GET } from './apiUrls.js'
 run()
 async function run() {
 
-  accountDropdown()
-  categoryDropdown()
-  subCatDropdown()
-  getSettingsFromMdb()
-
+  //first check if localstorage settings2 exists. if not run getSettingsFromMdb
+  if (localStorage.getItem("settings2") === null) {
+    getSettingsFromMdb()
+  } else {
+    accountDropdown()
+    categoryDropdown()
+    subCatDropdown()
+    getSettingsFromMdb()
+  }
   //eventlistener for when first selection is made
   // document.getElementById("category").addEventListener("click", subCatDropdown); //click doesn't work properly with mobile. "change" seems best event.
   // document.getElementById("category").addEventListener("touchstart", subCatDropdown);
