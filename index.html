@@ -15,17 +15,21 @@
   <!-- <script src="./swInit.js"></script> -->
   <script src="swInit.js"></script>
   <meta name="theme-color" content="#317EFB" />
+  <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
   <header>
     <!-- <h1 class="title">Finance Tracker 0.2</h1> -->
-    <div class="topnav">
-      <a class="active" href="index.html">Home</a>
+    <div class="topnav" id="myTopnav">
+      <a class="active" href="index.html">FT0.2</a>
       <a href="history.html">History</a>
       <a href="settings.html">Settings</a>
       <a href="reports.html">Reports</a>
-      <a>FT 0.2</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
     </div>
   </header>
   <main>
@@ -59,6 +63,16 @@
   </main>
   <script type="module" src="client.js"></script>
   <script type="module" src="category.js"></script>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+  </script>
 </body>
 
 </html>
