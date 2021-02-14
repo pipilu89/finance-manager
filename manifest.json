@@ -4,18 +4,18 @@
   "description": "track expenses",
   "icons": [
     {
-      "src": "/images/icons-192.png",
+      "src": "images/icons-192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/icons-512.png",
+      "src": "images/icons-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "background_color": "#3367D6",
   "display": "standalone",
   "scope": "/",
