@@ -1,6 +1,5 @@
-bug: after submit second dropdown may show subcat from previous cat. Solution: reset subcat after submit.
-
-create initial localstorage.
+servicewroker background sync needed?
+lighthouse score
 
 Reports, summaries.
   -monthly total

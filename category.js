@@ -7,10 +7,10 @@ async function run() {
 
   //first check if localstorage settings2 exists. if not run getSettingsFromMdb
   if (localStorage.getItem("settings2") === null) {
-    console.log('localStorage.getItem("settings2") === null');
+    // console.log('localStorage.getItem("settings2") === null');
     getSettingsFromMdb()
   } else {
-    console.log('localStorage.getItem("settings2") NOT null');
+    // console.log('localStorage.getItem("settings2") NOT null');
     accountDropdown()
     categoryDropdown()
     subCatDropdown()

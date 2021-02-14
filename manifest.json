@@ -4,9 +4,10 @@
   "description": "track expenses",
   "icons": [
     {
-      "src": "/finance-manager/images/icons-192.png",
+      "src": "/images/icons-192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "/images/icons-512.png",
@@ -18,5 +19,5 @@
   "background_color": "#3367D6",
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#3367D6"
+  "theme_color": "#3740ff"
 }

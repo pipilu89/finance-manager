@@ -4,13 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Description" content="Finance Tracker">
   <title>Finance Tracker</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"> -->
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.json">
   <link rel="shortcut icon" href="images/favicon.png">
   <script src="./mustache/mustache.min.js"></script>
   <script src="./swInit.js"></script>
+  <meta name="theme-color" content="#317EFB" />
 </head>
 
 <body>
@@ -25,26 +27,26 @@
       <!-- income/expense -->
       <!-- date -->
       <!-- <label for="date">Date</label> -->
-      <input type="date" name="date" id="date" required>
+      <input type="date" name="date" id="date" aria-label="date" required>
 
       <!-- account: cash taobao, wechat, alipay etc -->
-      <select id="account" name="account" required></select>
+      <select id="account" name="account" aria-label="account" required></select>
       <!-- category -->
-      <select id="category" name="category" required></select>
+      <select id="category" name="category" aria-label="category" required></select>
       <!-- sub cat -->
-      <select id="subCategory" name="subCategory"></select>
+      <select id="subCategory" name="subCategory" aria-label="subCategory"></select>
       <!-- amount -->
       <!-- <label for="amount">Amount</label> -->
-      <input type="number" id="amount" name="amount" placeholder="amount" required></input>
+      <input type="number" id="amount" name="amount" placeholder="amount" aria-label="amount" required></input>
       <!-- notes -->
       <!-- <label for="notes">Notes</label> -->
-      <input type="text" id="notes" name="notes" placeholder="notes"></input>
+      <input type="text" id="notes" name="notes" placeholder="notes" aria-label="notes"></input>
       <button class="button-primary">send</button>
     </form>
 
     <div>total this month:</div>
     <div class="loading">
-      <img src="loading.gif" alt="">
+      <img src="loading.gif" alt="loading" width="200" height="200">
     </div>
     <div class="transactions" id="transactions"></div>
 
