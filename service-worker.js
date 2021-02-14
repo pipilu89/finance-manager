@@ -18,8 +18,10 @@ const { StaleWhileRevalidate } = workbox.strategies;
 //For requests that are updating frequently, the network first strategy is the ideal solution. By default, it will try to fetch the latest response from the network. If the request is successful, it’ll put the response in the cache. If the network fails to return a response, the cached response will be used.
 registerRoute(/\.js$/, new NetworkFirst()); //best for development? quicker to update
 //registerRoute(/\.js$/, new StaleWhileRevalidate()); //cache js file
-registerRoute(/\.html$/, new StaleWhileRevalidate());
-registerRoute(/\.css$/, new StaleWhileRevalidate());
+// registerRoute(/\.html$/, new StaleWhileRevalidate());
+registerRoute(/\.html$/, new NetworkFirst());
+// registerRoute(/\.css$/, new StaleWhileRevalidate());
+registerRoute(/\.css$/, new NetworkFirst());
 registerRoute(/\.json$/, new StaleWhileRevalidate());
 registerRoute(/\.png$/, new StaleWhileRevalidate());
 registerRoute(/\.ico$/, new StaleWhileRevalidate());
