@@ -77,3 +77,14 @@ async function getExpenseData2() {
     })
     .catch((err) => console.log(err))
 }
+
+//function for top nav bar
+function topnavResponsive() {
+  const x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+document.getElementById('topnavicon').addEventListener('click', topnavResponsive)
