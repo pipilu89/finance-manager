@@ -25,13 +25,20 @@
     <h3>Reports</h3>
   </header>
 
-  <button id="queryBtn">query</button>
+  <button id="queryBtn">Monthly Summary</button>
   <p>current month:
     <span id="currentMonth"></span>
   </p>
   <div id="data"></div>
   <p>Last Month:<span id="lastMonth"></span></p>
   <div id="data2"></div>
+
+  <h5>Full List</h5>
+  <p>complete history for month</p>
+  <select id="monthSelect" name="monthSelect" required></select>
+  <select id="yearSelect" name="yearSelect" required></select>
+  <button id="getFullList">get</button>
+  <div id="data3"></div>
   <script type="module" src="./reports.js"></script>
 </body>
 

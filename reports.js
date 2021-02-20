@@ -206,3 +206,69 @@ document.getElementById('queryBtn').addEventListener('click', () => {
     }).catch((e) => console.log(e))
 
 })
+
+
+//full list year select
+const yearSelect = document.getElementById("yearSelect");
+const yearArray = [year, year - 1, year - 2, year - 3]
+for (const index in yearArray) {
+  yearSelect.options[yearSelect.options.length] = new Option(
+    yearArray[index], yearArray[index]);
+}
+
+//month select
+const selectMonth = document.getElementById("monthSelect");
+for (const index in monthNameArray) {
+  selectMonth.options[selectMonth.options.length] = new Option(
+    monthNameArray[index], index);
+}
+// document.getElementById('monthSelect').addEventListener('change', () => {
+//   console.log(parseInt(selectMonth.value) + 1);
+// })
+// document.getElementById('yearSelect').addEventListener('change', () => {
+//   console.log(parseInt(yearSelect.value));
+// })
+
+
+document.getElementById('getFullList').addEventListener('click', () => {
+  const month = parseInt(selectMonth.value) + 1
+  const year = parseInt(yearSelect.value)
+  console.log('month year', month, year);
+
+  const aggFullList = [
+    {
+      "$match": {
+        "month": month,
+        "year": year
+      },
+    },
+    {
+      "$sort": {
+        "date": -1
+      }
+    }
+  ];
+
+  //get last month summary
+  fetch(API_URL_EXPENSE_AGG, {
+    method: 'POST',
+    body: JSON.stringify(aggFullList),
+    headers: {
+      'content-type': 'application/json',
+      'auth-token': localStorage.getItem('auth-token')
+    }
+  }).then(response => response.json())
+    .then(mdbAggreation => {
+      console.log(mdbAggreation);
+      //sum group by to get total
+      const total = mdbAggreation.reduce((accumulator, currentValue, currentIndex, array) => {
+        return accumulator + currentValue.amount
+      }, 0)
+      mdbAggreation.push({ account: "total", amount: total })
+
+      console.log('total:', total);
+      //render
+      mustacheRenderFunction2(mdbAggreation
+        , './mustache/transactionHistory.mustache', "data3")
+    }).catch((e) => console.log(e))
+})
