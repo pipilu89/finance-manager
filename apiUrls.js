@@ -5,13 +5,15 @@ export const API_URL_POS = 'https://fin-man89.herokuapp.com/api/pos'  //read pos
 
 // export const API_URL_EXPENSE = 'http://localhost:3000/api/expense/list'
 export const API_URL_EXPENSE = 'https://fin-man89.herokuapp.com/api/expense/list'
-// export const API_URL_EXPENSE_ADD = 'http://localhost:3000/api/expense/add'  
+
+// export const API_URL_EXPENSE_ADD = 'http://localhost:3000/api/expense/add'
 export const API_URL_EXPENSE_ADD = 'https://fin-man89.herokuapp.com/api/expense/add'
-// export const API_URL_EXPENSE_AGG = "https://fin-man89.herokuapp.com/api/expense/agg"
-export const API_URL_EXPENSE_AGG = "http://localhost:3000/api/expense/agg"
+
+export const API_URL_EXPENSE_AGG = "https://fin-man89.herokuapp.com/api/expense/agg"
+// export const API_URL_EXPENSE_AGG = "http://localhost:3000/api/expense/agg"
 
 
-// const loginURL = 'http://localhost:3000/api/user/login'
+// export const API_URL_LOGIN = 'http://localhost:3000/api/user/login'
 export const API_URL_LOGIN = 'https://fin-man89.herokuapp.com/api/user/login'
 
 //if deployed update to reflect hostel uri

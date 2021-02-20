@@ -12,11 +12,26 @@
 </head>
 
 <body>
-  <h1>Reports</h1>
-  <a href="./index.html">home</a>
-  current month:<div id="date"></div>
+  <header>
+    <div class="topnav" id="myTopnav">
+      <a href="index.html">FT0.2</a>
+      <a href="history.html">History</a>
+      <a href="settings.html">Settings</a>
+      <a class="active" href="reports.html">Reports</a>
+      <a href="#" class="topnavicon" id="topnavicon">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <h3>Reports</h3>
+  </header>
+
   <button id="queryBtn">query</button>
+  <p>current month:
+    <span id="currentMonth"></span>
+  </p>
   <div id="data"></div>
+  <p>Last Month:<span id="lastMonth"></span></p>
+  <div id="data2"></div>
   <script type="module" src="./reports.js"></script>
 </body>
 

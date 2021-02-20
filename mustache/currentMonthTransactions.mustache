@@ -2,8 +2,11 @@
     <thead>
       <tr>
        
-        <th>category</th>
+        <th>cat</th>
+        <th>sub cat</th>
         <th>amount</th>
+        <th>month</th>
+        <th>year</th>
        
       </tr>
     </thead>
@@ -11,8 +14,11 @@
 {{#.}}
   <tr>
   
+    <td> {{cat}}</td>
     <td> {{_id}}</td>
     <td> {{total}}</td>
+    <td> {{month}}</td>
+    <td> {{year}}</td>
     
   </tr>
     {{/.}}

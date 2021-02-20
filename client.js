@@ -20,6 +20,12 @@ form.addEventListener('submit', (event) => {
 
   const formData = new FormData(form)
   const date = formData.get('date')
+  const dateObj = new Date(date);
+
+  const month = dateObj.getMonth() + 1
+  const year = dateObj.getFullYear()
+  // console.log('month year', month, year);
+
   // const account = formData.get('account')
   const e = document.getElementById("account");
   const account = e.options[e.selectedIndex].text;
@@ -35,9 +41,9 @@ form.addEventListener('submit', (event) => {
   const subCategory = e2.options[e2.selectedIndex].text;
 
   const notes = formData.get('notes')
-  console.log('amount', amount);
-  const transaction = JSON.stringify({ date, account, amount, category, subCategory, notes })
-  console.log(transaction);
+  // console.log('amount', amount);
+  const transaction = JSON.stringify({ date, month, year, account, amount, category, subCategory, notes })
+  console.log('transaction', transaction);
 
   fetch(API_URL_EXPENSE_ADD, {
     method: 'POST',
@@ -70,7 +76,7 @@ async function getExpenseData2() {
       return response.json()
     })
     .then((res) => {
-      console.log(res)
+      console.table(res)
       mustacheRenderFunction(res
         , './mustache/transactionHistory.mustache', "transactions")
       loadingElement.style.display = 'none'

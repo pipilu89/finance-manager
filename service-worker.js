@@ -16,13 +16,15 @@ const { StaleWhileRevalidate } = workbox.strategies;
 
 //https://developers.google.com/web/tools/workbox/modules/workbox-strategies
 //For requests that are updating frequently, the network first strategy is the ideal solution. By default, it will try to fetch the latest response from the network. If the request is successful, it’ll put the response in the cache. If the network fails to return a response, the cached response will be used.
-// registerRoute(/\.js$/, new NetworkFirst()); //best for development? quicker to update
-registerRoute(/\.js$/, new StaleWhileRevalidate()); //cache js file
-registerRoute(/\.html$/, new StaleWhileRevalidate());
-// registerRoute(/\.html$/, new NetworkFirst());
-registerRoute(/\.css$/, new StaleWhileRevalidate());
-// registerRoute(/\.css$/, new NetworkFirst());
-registerRoute(/\.json$/, new StaleWhileRevalidate());
+registerRoute(/\.js$/, new NetworkFirst()); //best for development? quicker to update
+// registerRoute(/\.js$/, new StaleWhileRevalidate()); //cache js file
+// registerRoute(/\.html$/, new StaleWhileRevalidate());
+registerRoute(/\.html$/, new NetworkFirst());
+// registerRoute(/\.css$/, new StaleWhileRevalidate());
+registerRoute(/\.css$/, new NetworkFirst());
+// registerRoute(/\.json$/, new StaleWhileRevalidate());
+registerRoute(/\.json$/, new NetworkFirst());
+
 registerRoute(/\.png$/, new StaleWhileRevalidate());
 registerRoute(/\.ico$/, new StaleWhileRevalidate());
 //The stale-while-revalidate pattern allows you to respond to the request as quickly as possible with a cached response if available, falling back to the network request if it’s not cached. The network request is then used to update the cache. This is a fairly common strategy where having the most up-to-date resource is not vital to the application.
