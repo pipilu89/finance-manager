@@ -1,9 +1,10 @@
 import { API_URL_SETTINGS_ADD } from './apiUrls.js';
 import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
-// import { getAccountsArray } from './category.js'
-// import { accountsArray } from './data.js'
+import { topnavResponsive } from './navbar.js'
 
-// const form = document.querySelector('form');
+//event listener for top nav bar
+document.getElementById('topnavicon').addEventListener('click', topnavResponsive)
+
 const accountForm = document.getElementById('newAccountForm');
 const categoryForm = document.getElementById('newCatForm');
 const subCategoryForm = document.getElementById('newSubCatForm');

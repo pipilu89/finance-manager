@@ -1,6 +1,7 @@
 import { mustacheRenderFunction } from './mustache/mustacheModule.mjs'
 import { API_URL_EXPENSE_ADD, API_URL_EXPENSE } from './apiUrls.js'
 import { subCatDropdown } from './category.js'
+import { topnavResponsive } from './navbar.js'
 
 
 const form = document.querySelector('form');
@@ -84,13 +85,5 @@ async function getExpenseData2() {
     .catch((err) => console.log(err))
 }
 
-//function for top nav bar
-function topnavResponsive() {
-  const x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
+//event listener for top nav bar
 document.getElementById('topnavicon').addEventListener('click', topnavResponsive)

@@ -1,5 +1,9 @@
 import { API_URL_EXPENSE_AGG } from './apiUrls.js';
 import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
+import { topnavResponsive } from './navbar.js'
+
+//event listener for top nav bar
+document.getElementById('topnavicon').addEventListener('click', topnavResponsive)
 
 //get current date
 const today = new Date();
