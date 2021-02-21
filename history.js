@@ -1,12 +1,12 @@
 import { mustacheRenderFunction } from './mustache/mustacheModule.mjs'
-import { login } from './login.js'
+// import { login } from './login.js'
 import { API_URL_ELEC, API_URL_POS, API_URL_EXPENSE } from './apiUrls.js'
 import { topnavResponsive } from './navbar.js'
 
 //event listener for top nav bar
 document.getElementById('topnavicon').addEventListener('click', topnavResponsive)
 
-login()
+// login()
 
 document.getElementById('loading').style.display = 'none';
 
