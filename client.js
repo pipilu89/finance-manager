@@ -62,7 +62,10 @@ form.addEventListener('submit', (event) => {
       //date picker
       document.getElementById('date').value = new Date().toISOString().slice(0, 10)
       form.style.display = ''
-      // recentTransactions()
+      //scroll to top left of page
+      document.documentElement.scrollTop = 0;
+      document.documentElement.scrollLeft = 0;
+      // refresh data
       getExpenseData2()
       getSummary()
       loadingElement.style.display = 'none'
