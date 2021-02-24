@@ -1,7 +1,8 @@
 import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
-import { API_URL_EXPENSE_ADD, API_URL_EXPENSE, API_URL_EXPENSE_DELETE } from './apiUrls.js'
+import { API_URL_EXPENSE_ADD, API_URL_EXPENSE, API_URL_EXPENSE_DELETE, API_URL_EXPENSE_AGG } from './apiUrls.js'
 import { subCatDropdown } from './category.js'
 import { topnavResponsive } from './navbar.js'
+import { currentMonthYear, lastMonthYearFunc, monthNameFunction, monthNameArray } from './utils.js'
 
 
 const form = document.querySelector('form');
@@ -63,6 +64,7 @@ form.addEventListener('submit', (event) => {
       form.style.display = ''
       // recentTransactions()
       getExpenseData2()
+      getSummary()
       loadingElement.style.display = 'none'
     })
 })
@@ -96,31 +98,19 @@ async function getExpenseData2() {
 //event listener for top nav bar
 document.getElementById('topnavicon').addEventListener('click', topnavResponsive)
 
-// deleteProduct2()
 //event delete button. need to run after render to create eventlistners?
 function deleteProduct2() {
   const deleteItem = function (e) {
     console.log(e.target.parentNode.parentNode.id);
     const recordID = e.target.parentNode.parentNode.id;
-    const recordName = e.target.parentNode.parentNode.className;
+    // const recordName = e.target.parentNode.parentNode.className;
     // console.log('recordID, recordName', recordID, recordName);
-    if (confirm(`确定删掉吗? Delete ${recordName}， id：${recordID}, are you sure?`)) {
+    if (confirm(`确定删掉吗? Delete id：${recordID}, are you sure?`)) {
       const query = { "_id": recordID }
-
       console.log("delete query", query);
-      //delete account from settings obj
-      // const a = JSON.parse(localStorage.getItem('settings2'))
 
-      // //indexof account to delete
-      // const index = a.accounts.findIndex(item => item.id === parseInt(recordID))
-      // a.accounts.splice(index, 1);
-      // localStorage.setItem("settings2", JSON.stringify(a));
-
-      // delete form DB
-      //--send account array as string
       fetch(API_URL_EXPENSE_DELETE, {
         method: 'POST',
-        // body: JSON.stringify(accountsArray),
         body: JSON.stringify(query),
         headers: {
           'content-type': 'application/json',
@@ -131,7 +121,10 @@ function deleteProduct2() {
           console.log('res from mdb: ', res);
           //refresh list
           getExpenseData2()
-
+          getSummary()
+          //scroll to top left of page
+          document.documentElement.scrollTop = 0;
+          document.documentElement.scrollLeft = 0;
         })
     }
   };
@@ -140,4 +133,59 @@ function deleteProduct2() {
   for (let i = 0; i < elements2.length; i++) {
     elements2[i].addEventListener("click", deleteItem, false);
   }
+}
+
+
+//summary
+getSummary()
+function getSummary() {
+  const [month, year] = currentMonthYear()
+
+  const agg = [
+    {
+      "$match": {
+        "month": month,
+        "year": year
+      },
+    }, {
+      "$group": {
+        // "_id": null, //give full total
+        "_id": "$category",
+        "total": {
+          "$sum": "$amount"
+        },
+        // cat: { $first: "$category" },
+        month: { $first: "$month" },
+        year: { $first: "$year" }
+      }
+    }, {
+      "$sort": {
+        "total": -1
+      }
+    }
+  ];
+
+  console.log("send agg to mdb...");
+  //get this month summary
+  fetch(API_URL_EXPENSE_AGG, {
+    method: 'POST',
+    body: JSON.stringify(agg),
+    headers: {
+      'content-type': 'application/json',
+      'auth-token': localStorage.getItem('auth-token')
+    }
+  }).then(response => response.json())
+    .then(mdbAggreation => {
+      console.log(mdbAggreation);
+      //sum group by to get total
+      const total = mdbAggreation.reduce((accumulator, currentValue, currentIndex, array) => {
+        return accumulator + currentValue.total
+      }, 0)
+      mdbAggreation.push({ _id: "total", total: total, month: month, year: year })
+
+      console.log('total:', total);
+      //render
+      mustacheRenderFunction2(mdbAggreation
+        , './mustache/monthSummary.mustache', "summary")
+    }).catch((e) => console.log(e))
 }

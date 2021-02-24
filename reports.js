@@ -1,71 +1,18 @@
 import { API_URL_EXPENSE_AGG } from './apiUrls.js';
 import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
 import { topnavResponsive } from './navbar.js'
+import { currentMonthYear, lastMonthYearFunc, monthNameFunction, monthNameArray } from './utils.js'
+
+// let monthtest, yeartest
+const [month, year] = currentMonthYear()
+const [lastMonth, lastMonthYear] = lastMonthYearFunc()
+const [monthName, lastMonthName] = monthNameFunction()
+
+document.getElementById('currentMonth').textContent = monthName + ' ' + year
+document.getElementById('lastMonth').textContent = lastMonthName + ' ' + lastMonthYear
 
 //event listener for top nav bar
 document.getElementById('topnavicon').addEventListener('click', topnavResponsive)
-
-//get current date
-const today = new Date();
-// const today = new Date(
-//   2021, 0, 31
-// );
-const monthNameArray = new Array();
-monthNameArray[0] = "January";
-monthNameArray[1] = "February";
-monthNameArray[2] = "March";
-monthNameArray[3] = "April";
-monthNameArray[4] = "May";
-monthNameArray[5] = "June";
-monthNameArray[6] = "July";
-monthNameArray[7] = "August";
-monthNameArray[8] = "September";
-monthNameArray[9] = "October";
-monthNameArray[10] = "November";
-monthNameArray[11] = "December";
-const monthName = monthNameArray[today.getMonth()];
-
-//get current month /year and previous month /year (year will be different if current month = december)
-const year = today.getFullYear()
-const month = today.getMonth() + 1
-
-let lastMonthYear = year
-if (month == 1) {
-  lastMonthYear = year - 1
-}
-let lastMonth = month - 1
-if (month == 1) {
-  lastMonth = 12
-}
-const lastMonthName = monthNameArray[lastMonth - 1];
-
-document.getElementById('currentMonth').textContent = monthName + " " + year
-document.getElementById('lastMonth').textContent = lastMonthName + " " + lastMonthYear
-
-//date query
-const firstDayOfMonth = new Date(
-  today.getFullYear(),
-  today.getMonth(),
-  2, //day?
-  0, //change to 2am to catch after midnight records.
-  0,
-  0
-);
-
-const lastDayOfMonth = new Date(
-  today.getFullYear(),
-  today.getMonth() + 1,
-  1, //day?
-  0, //change to 2am to catch after midnight records.
-  0,
-  0
-);
-
-console.log('today', today);
-console.log('today', today.toISOString().slice(0, 10));
-console.log('firstDayOfMonth', firstDayOfMonth.toISOString().slice(0, 10));
-console.log('lastDayOfMonth', lastDayOfMonth.toISOString().slice(0, 10));
-console.log("month year", month, year);
 
 const agg = [
   {

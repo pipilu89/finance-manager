@@ -1,0 +1,24 @@
+  <table id='monthSummaryTable'>
+    <thead>
+      <tr>
+       
+        <th>cat</th>
+        <th>amount</th>
+        <th>month</th>
+        <th>year</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+{{#.}}
+  <tr>
+  
+    <td> {{_id}}</td>
+    <td> {{total}}</td>
+    <td> {{month}}</td>
+    <td> {{year}}</td>
+    
+  </tr>
+    {{/.}}
+    </tbody>
+  </table>
