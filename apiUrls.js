@@ -12,6 +12,9 @@ export const API_URL_EXPENSE_ADD = 'https://fin-man89.herokuapp.com/api/expense/
 export const API_URL_EXPENSE_AGG = "https://fin-man89.herokuapp.com/api/expense/agg"
 // export const API_URL_EXPENSE_AGG = "http://localhost:3000/api/expense/agg"
 
+// export const API_URL_EXPENSE_DELETE = "https://fin-man89.herokuapp.com/api/expense/delete"
+export const API_URL_EXPENSE_DELETE = "http://localhost:3000/api/expense/delete"
+
 
 // export const API_URL_LOGIN = 'http://localhost:3000/api/user/login'
 export const API_URL_LOGIN = 'https://fin-man89.herokuapp.com/api/user/login'

@@ -1,7 +1,7 @@
   <table id='transactionHistoryTable'>
     <thead>
       <tr>
-        <th>date</th>
+        <th >date</th>
         <th>account</th>
         <th>amount</th>
         <th>category</th>
@@ -13,8 +13,8 @@
     </thead>
     <tbody>
 {{#.}}
-  <tr>
-    <td> {{date}}</td>
+  <tr id="{{_id}}">
+    <td > {{date}}</td>
     <td> {{account}}</td>
     <td> {{amount}}</td>
     <td> {{category}}</td>
@@ -22,6 +22,7 @@
     <td> {{month}}</td>
     <td> {{year}}</td>
     <td> {{notes}}</td>
+    <td><button class="deleteProductBtn">x</button></td>
   </tr>
     {{/.}}
     </tbody>
