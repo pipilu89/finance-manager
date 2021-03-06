@@ -2,7 +2,7 @@ import { mustacheRenderFunction2 } from './mustache/mustacheModule.mjs'
 import { API_URL_EXPENSE_ADD, API_URL_EXPENSE, API_URL_EXPENSE_DELETE, API_URL_EXPENSE_AGG } from './apiUrls.js'
 import { subCatDropdown } from './category.js'
 import { topnavResponsive } from './navbar.js'
-import { currentMonthYear, lastMonthYearFunc, monthNameFunction, monthNameArray } from './utils.js'
+import { currentMonthYear } from './utils.js'
 
 
 const form = document.querySelector('form');
