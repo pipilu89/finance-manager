@@ -2,41 +2,33 @@
     <thead>
       <tr>
         <th>product/date</th>
-        
         <th>type</th>
         <th>total</th>
         <th>wechat</th>
         <th>alipay</th>
         <th>cash</th>
-        <th>user</th>
       </tr>
     </thead>
     <tbody>
 {{#.}}
-
-      {{#items}}
-        <tr>
-          
-          <td> {{productName}}</td>
-          <td> {{type}}</td>
-          <td> {{total}}</td>
-          <td> </td>
-          <td> </td>
-          <td> </td>
-          <td> {{user}}</td>
-        </tr>
-      {{/items}}
-        <tr>
-    <td> {{#items}}{{transDate}} {{/items}}</td>
-    
-    <td> {{type}}</td>
-    <td> {{total}}</td>
-    <td> {{wechat}}</td>
-    <td> {{alipay}}</td>
-    <td> {{cash}}</td>
-    <td> </td>
-
-  </tr>
-    {{/.}}
-    </tbody>
-  </table>
+  {{#items}}
+    <tr>
+      <td> {{productName}}</td>
+      <td> {{type}}</td>
+      <td> {{total}}</td>
+      <td> </td>
+      <td> </td>
+      <td> {{user}}</td>
+    </tr>
+  {{/items}}
+    <tr>
+      <td> {{#items}}{{transDate}} {{/items}}</td>
+      <td> {{type}}</td>
+      <td> {{total}}</td>
+      <td> {{wechat}}</td>
+      <td> {{alipay}}</td>
+      <td> {{cash}}</td>
+    </tr>
+{{/.}}
+</tbody>
+</table>
