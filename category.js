@@ -9,12 +9,19 @@ async function run() {
   if (localStorage.getItem("settings2") === null) {
     // console.log('localStorage.getItem("settings2") === null');
     getSettingsFromMdb()
+
+    //refresh dropdown select
+    accountDropdown()
+    categoryDropdown()
+    subCatDropdown()
+    console.log('settings retrieve success');
+
   } else {
     // console.log('localStorage.getItem("settings2") NOT null');
     accountDropdown()
     categoryDropdown()
     subCatDropdown()
-    getSettingsFromMdb()
+    getSettingsFromMdb() //problem with select changeing during input?
   }
   //eventlistener for when first selection is made
   // document.getElementById("category").addEventListener("click", subCatDropdown); //click doesn't work properly with mobile. "change" seems best event.
@@ -91,17 +98,18 @@ async function getSettingsFromMdb() {
       localStorage.setItem("settings2", JSON.stringify(res[0]));
 
 
-      //refresh dropdown select
-      accountDropdown()
-      categoryDropdown()
-      subCatDropdown()
+      // //refresh dropdown select
+      // accountDropdown()
+      // categoryDropdown()
+      // subCatDropdown()
       console.log('settings retrieve success');
+
     })
     .catch((err) => {
       console.log('error getting settings from mdb: ', err)
-      accountDropdown()
-      categoryDropdown()
-      subCatDropdown()
+      // accountDropdown()
+      // categoryDropdown()
+      // subCatDropdown()
     })
 }
 
